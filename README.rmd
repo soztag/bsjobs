@@ -2,7 +2,7 @@
 title: About
 ---
 
-[![Build Status](https://travis-ci.com/soztag/sublab.svg?token=VqJKxxUwxXFJyYyqJx7G&branch=master)](https://travis-ci.com/soztag/sublab)
+[![Build Status](https://travis-ci.com/soztag/fgmbs.svg?token=VqJKxxUwxXFJyYyqJx7G&branch=master)](https://travis-ci.com/soztag/fgmbs)
 
 ## Abstract
 
