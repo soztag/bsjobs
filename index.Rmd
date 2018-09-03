@@ -55,7 +55,7 @@ Google Books Daten stehen nur bis 2012 zur Verfügung; davor keine Ergebnisse f�
 
 ## Google Trends
 
-```{r, fig.cap="Google Trends (LOESSS)"}
+```{r, fig.cap="Google Trends von FGM Begriffen (LOESSS)"}
 fgm_gtrends <- gtrendsR::gtrends(
   keyword = fgm_terms$term[1:5], 
   time = "all", 
@@ -71,33 +71,138 @@ ggplot(
     color = keyword
   )
 ) +
-  geom_smooth(formula = y ~ x, method = "loess", se = TRUE, na.rm = TRUE, span = 0.3) +
+  geom_smooth(formula = y ~ x, method = "loess", se = TRUE, na.rm = TRUE, span = 0.2) +
   ylim(0, 100) +  # because google trends are indexed to 100
   scale_x_date(date_breaks = "1 year") + 
   guides(color = guide_legend(ncol = 2)) + 
   theme(legend.position = "bottom", axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
+Die Abbildung gibt die weltweiten Google-Anfragen zu den aufgelisteten Konzepten wieder, indexiert auf einen (rohen) Höchstwert von 100.
+Die Rohdaten sind allerdings recht verrausscht, daher wird hier eine erheblich geglättete Form präsentiert, in der der Höchstwert nicht mehr enthalten ist.
+
+Wie man in der o.s. Abbildung sieht, werden die englischen FGM-Begriffe durchgehend ab 2007 verwendet, die deutschen Termini ab etwa 2012, und die französischen erst seit 2016.
+
+Fast alle (berichtete) Suchaktivität entspringt den USA, Deutschland und Frankreich, darunter vor allem die Hauptstädte Berlin und Frankreich.
+Schwache Suchaktivitäten sind in den Daten nicht enthalten.
+
+
+```{r fig.cap="Google Trends von FGM Begriffen im Vergleich (LOESSS)", warning = FALSE}
+other_trends <- gtrendsR::gtrends(
+  keyword = c("scrum master", "data scientist", "social media manager", "growth hacker"),
+  time = "all",
+  low_search_volume = TRUE
+)
+
+# weirdly, above sometimes includes characters ">1" as hits, so this needs to be fixed
+other_trends$interest_over_time$hits <- as.integer(other_trends$interest_over_time$hits)
+other_trends$interest_over_time$hits[is.na(other_trends$interest_over_time$hits)] <- 0
+
+df <- dplyr::bind_rows(
+  list(
+    fgm = fgm_gtrends$interest_over_time, 
+    others = other_trends$interest_over_time
+  ), 
+  .id = "group"
+) %>% 
+  as_tibble()
+
+
+# now because these two datasets are separately indexed to 100, we need to download the two highest together, to find the right multiplier
+highest <- group_by(df, group) %>% 
+  filter(hits == max(hits)) %>% 
+  select(keyword) %>% 
+  deframe()
+multiplier <- gtrendsR::gtrends(
+  keyword = highest,
+  time = "all",
+  low_search_volume = TRUE
+) %>% 
+  extract2("interest_over_time") %>% 
+  group_by(keyword) %>% 
+  filter(hits == max(hits)) %>% 
+  select(hits) %>% 
+  deframe() %>% 
+  as.integer() %>% 
+  min() %>% 
+  divide_by(100)
+
+df <- mutate(
+  .data = df,
+  hits = if_else(
+    condition = group == "fgm",
+    true = hits * multiplier,
+    false = hits
+  )
+)
+
+g <- ggplot(
+  data = df,
+  mapping = aes(
+    x = date,
+    y = hits,
+    color = keyword,
+    linetype = group
+  )
+) +
+  geom_smooth(formula = y ~ x, method = "loess", se = TRUE, na.rm = TRUE, span = 0.3) +
+  ylim(0, 100) +  # because google trends are indexed to 100
+  scale_x_date(date_breaks = "1 year") + 
+  guides(color = guide_legend(ncol = 2)) + 
+  theme(
+    legend.position = "bottom", 
+    axis.text.x = element_text(angle = 90, hjust = 1)
+  )
+g
+```
+
+Die oben stehende Abbildung zeigt die Suchanfragen skaliert nach den höchsten aus einer Gruppe von anderen neuen und trendigen Berufen.
+Im Vergleich wird deutlich, dass es sich bei FGM um ein ausgesprochenes Nischenphänomen handelt.
+
 
 ## Twitter Trends
 
 ```{r twitter_grab, eval=FALSE, include=FALSE}
 # this only works locally, because of keys
-fgm_tweets <- rtweet::search_tweets2(
-  q = fgm_terms$term,
-  n = 1000,
-  type = "mixed",
-  include_rts = FALSE,
-  parse = TRUE
+tweets <- purrr::imap_dfr(
+  .x = list(
+    fgm = fgm_terms$term,
+    bs = c(
+      '"bullshit jobs"',
+      '"bullshit job"',
+      "#bullshitjob", 
+      "#bullshitjobs"
+    )
+  ),
+  .id = "group",
+  .f = function(x, y) {
+    rtweet::search_tweets2(
+      q = x,
+      n = 18000,
+      type = "mixed",
+      include_rts = TRUE,
+      parse = TRUE
+    )
+  }
 )
-readr::write_rds(x = fgm_tweets, path = "fgm_tweets.rds")
+readr::write_rds(x = tweets, path = "tweets.rds")
 ```
 
 ```{r twitter_load}
-fgm_tweets <- readr::read_rds(path = "fgm_tweets.rds")
+tweets <- readr::read_rds(path = "tweets.rds")
+n_terms <- group_by(.data = tweets, group) %>% 
+  summarise(n = n()) %>% 
+  deframe()
 ```
 
+In der vergangenen Woche wurden zu allen o.g. Stichwörtern **`r n_terms["fgm"]`** Tweets (*inklusive retweets!*) abgesetzt.
+Für eine tiefergehende Analyse sind zu wenig.
+Nach kursorischer Untersuchung handelt es sich überwiegend um Links zu relativ wenigen Artikeln.
 
+Im Vergleich wurde zum Thema Bullshit Jobs **`r n_terms["bs"]`** Mal getweetet.
+Hier ist eventuelle eine Sentiment-Analyse o.ä. möglich.
+
+Twitter hat kürzlich die Bedingungen ihrer API geändert; frei verfügbar sind nur noch Daten der letzten 6-9 Tage.
 
 
 # Bibliografie

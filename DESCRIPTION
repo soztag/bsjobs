@@ -9,4 +9,5 @@ Imports:
   ggplot2,
   tibble,
   rtweet,
-  readr
+  readr,
+  tidyverse

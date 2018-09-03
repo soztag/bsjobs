@@ -4,6 +4,8 @@ library(rmarkdown)
 library(printr)
 library(ggplot2)
 library(tibble)
+library(dplyr)
+library(magrittr)
 
 # knitr setup ====
 knitr::opts_chunk$set(
