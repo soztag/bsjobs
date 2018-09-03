@@ -32,5 +32,12 @@ source("setup.R")
 
 # Web Trends
 
+## Google Books NGrams
+
+Google Books Daten stehen nur bis 2012 zur Verfügung; davor keine Ergebnisse für `chief happiness officer` oder `feelgood manager`.
+
+
+## Google Trends
+
 
 # Bibliografie
