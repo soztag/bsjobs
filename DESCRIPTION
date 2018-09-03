@@ -6,4 +6,6 @@ Imports:
   rmarkdown,
   gtrendsR,
   printr,
-  ggplot2
+  ggplot2,
+  tibble,
+  tweetr

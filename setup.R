@@ -3,6 +3,7 @@ library(knitr)
 library(rmarkdown)
 library(printr)
 library(ggplot2)
+library(tibble)
 
 # knitr setup ====
 knitr::opts_chunk$set(
