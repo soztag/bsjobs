@@ -32,12 +32,51 @@ source("setup.R")
 
 # Web Trends
 
+Web Trends zu diesen einschlägigen Begriffen:
+
+```{r terms}
+fgm_terms <- tibble::tribble(
+  ~term, ~short, ~lang,
+  "chief happiness officer", "cho", "en-US",
+  "happiness officer", "ho", "en-US",
+  "feelgood manager", "fgm", "de-DE",
+  "feel good manager", "fgm2", "de-DE",
+  "chef du bonheur", "cdb", "fr-FR",
+  "directeur du bonheur", "ddb", "fr-FR"
+)
+knitr::kable(x = fgm_terms, caption = "Relevante Suchbegriffe")
+```
+
+
 ## Google Books NGrams
 
 Google Books Daten stehen nur bis 2012 zur Verfügung; davor keine Ergebnisse für `chief happiness officer` oder `feelgood manager`.
 
 
 ## Google Trends
+
+```{r, fig.cap="Google Trends (LOESSS)"}
+fgm_gtrends <- gtrendsR::gtrends(
+  keyword = fgm_terms$term[1:5], 
+  time = "all", 
+  low_search_volume = TRUE
+)
+# country is mostly france
+# region and city is paris, nothing much else
+ggplot(
+  data = fgm_gtrends$interest_over_time,
+  mapping = aes(
+    x = date,
+    y = hits,
+    color = keyword
+  )
+) +
+  geom_smooth(formula = y ~ x, method = "loess", se = TRUE, na.rm = TRUE, span = 0.3) +
+  ylim(0, 100) +  # because google trends are indexed to 100
+  scale_x_date(date_breaks = "1 year") + 
+  guides(color = guide_legend(ncol = 2)) + 
+  theme(legend.position = "bottom", axis.text.x = element_text(angle = 90, hjust = 1))
+```
 
 
 # Bibliografie
