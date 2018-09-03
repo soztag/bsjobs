@@ -1,0 +1,9 @@
+---
+title: About
+---
+
+[![Build Status](https://travis-ci.com/soztag/sublab.svg?token=VqJKxxUwxXFJyYyqJx7G&branch=master)](https://travis-ci.com/soztag/sublab)
+
+## Abstract
+
+Entwürfe zu Feelgood managern und bullshit jobs [@GraeberBullshitJobsTheory2018].

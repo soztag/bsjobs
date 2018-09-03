@@ -1,0 +1,24 @@
+name: Feelgood Managers and BS Jobs
+navbar:
+  title: Feelgood Managers
+  right:
+  - icon: fa-university
+    menu:
+    - text: Institut für Soziologie
+      href: https://www.soziologie.phil.fau.de)
+    - text: Nuremberg Campus of Technology
+      href: https://www.ncatec.de
+  - icon: fa-github
+    href: https://github.com/soztag/sublab
+output:
+  html_document:
+    theme: cosmo
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+    smart: yes
+    fig_caption: yes
+    lib_dir: site_libs
+    self_contained: no
+output_dir: _site
+

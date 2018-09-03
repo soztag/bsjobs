@@ -1,0 +1,36 @@
+--- 
+title: "Feelgood Managers und 'Bullshit Jobs'"
+author: 
+  - name: "Marco Blank"
+    affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
+  - name: "Maximilian Held"
+    affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
+  - name: "Verena Kasztantowicz"
+    affiliation: "Humboldt-Universität zu Berlin (HU)"
+  - name: "Horan Lee"
+    affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
+  - name: "Manuel Nicklich"
+    affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
+  - name: "Sabine Pfeiffer"
+    affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
+  - name: "Stefan Sauer"
+    affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
+  - name: "Amelie Tihlarik"
+    affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+bibliography: held_library.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, child="README.rmd"}
+```
+
+```{r setup, cache = FALSE, include = FALSE}
+source("setup.R")
+```
+
+# Web Trends
+
+
+# Bibliografie
