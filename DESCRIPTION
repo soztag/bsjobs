@@ -8,4 +8,5 @@ Imports:
   printr,
   ggplot2,
   tibble,
-  rtweet
+  rtweet,
+  readr
