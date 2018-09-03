@@ -10,4 +10,7 @@ Imports:
   tibble,
   rtweet,
   readr,
-  tidyverse
+  tidyverse,
+  purrr
+Remotes:
+  tidyverse/purrr
