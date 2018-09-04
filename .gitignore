@@ -5,3 +5,5 @@
 _site/
 index_cache/
 index_files/
+praw.ini
+*.pyc

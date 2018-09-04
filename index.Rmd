@@ -30,7 +30,9 @@ editor_options:
 source("setup.R")
 ```
 
-# Web Trends
+# Feelgood Management
+
+## Web Trends
 
 Web Trends zu diesen einschlägigen Begriffen:
 
@@ -203,6 +205,38 @@ Im Vergleich wurde zum Thema Bullshit Jobs **`r n_terms["bs"]`** Mal getweetet.
 Hier ist eventuelle eine Sentiment-Analyse o.ä. möglich.
 
 Twitter hat kürzlich die Bedingungen ihrer API geändert; frei verfügbar sind nur noch Daten der letzten 6-9 Tage.
+
+
+# Bullshit Jobs
+
+## reddit comments
+
+```{r import_via_praw, eval=FALSE, include=FALSE}
+library(reticulate)
+os <- import(module = "os")  # just to access the os via python and figure out current wd
+checkmate::assert_true(x = getwd() == os$getcwd()) 
+praw <- import(module = "praw")
+# this calls credentials stored in praw.ini, but gitignored here
+# as per https://praw.readthedocs.io/en/latest/getting_started/configuration/environment_variables.html
+py_objs <- py_run_file(file = "praw.py", convert = TRUE)
+r_coms <- imap_chr(.x = py_objs$res, .f = function(x, y) {
+  if (inherits(x = x, what = "praw.models.reddit.more.MoreComments")) {
+    NA
+  } else {
+   x$body 
+  }
+})
+# remove NAs which are actually just "more" tags
+r_coms <- r_coms[!is.na(r_coms)]
+readr::write_rds(x = r_coms, path = "r_coms.rds")
+```
+
+
+```{r}
+r_coms <- readr::read_rds(path = "r_coms.rds")
+```
+
+
 
 
 # Bibliografie
