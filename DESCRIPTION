@@ -7,11 +7,13 @@ Imports:
   gtrendsR,
   printr,
   ggplot2,
+  hunspell,
   tibble,
   rtweet,
   readr,
   tidyverse,
   purrr,
-  tidytext
+  tidytext,
+  textstem
 Remotes:
   tidyverse/purrr

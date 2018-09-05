@@ -238,16 +238,26 @@ discard(.x = py_objs$res, .p = function(x) {
 
 
 ```{r}
-text_df <- readr::read_rds(path = "r_coms.rds") %>% 
+td_coms <- readr::read_rds(path = "r_coms.rds") %>% 
   tidyr::separate_rows(
     body,
     sep = "\n\n"
   ) %>% 
   group_by(id) %>% 
-  mutate(line = 1:n()) 
+  mutate(line = 1:n()) %>% 
+  ungroup() %>% 
+  unnest_tokens(output = word, input = body, format = "text") %>% 
+  anti_join(stop_words) %>% 
+  mutate(
+    word = textstem::lemmatize_strings(
+      x = word, 
+      dictionary = textstem::make_lemma_dictionary(word, engine = "hunspell")
+    )
+  )
+```
 
-text_df %>% 
-  unnest_tokens(output = word, input = body)
+```{r}
+count(x = td_coms, word, sort = TRUE)
 ```
 
 
