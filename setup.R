@@ -6,6 +6,7 @@ library(ggplot2)
 library(tibble)
 library(dplyr)
 library(magrittr)
+library(tidytext)
 
 # knitr setup ====
 knitr::opts_chunk$set(

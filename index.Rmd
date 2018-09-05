@@ -219,21 +219,35 @@ praw <- import(module = "praw")
 # this calls credentials stored in praw.ini, but gitignored here
 # as per https://praw.readthedocs.io/en/latest/getting_started/configuration/environment_variables.html
 py_objs <- py_run_file(file = "praw.py", convert = TRUE)
-r_coms <- imap_chr(.x = py_objs$res, .f = function(x, y) {
-  if (inherits(x = x, what = "praw.models.reddit.more.MoreComments")) {
-    NA
-  } else {
-   x$body 
-  }
-})
-# remove NAs which are actually just "more" tags
-r_coms <- r_coms[!is.na(r_coms)]
-readr::write_rds(x = r_coms, path = "r_coms.rds")
+
+discard(.x = py_objs$res, .p = function(x) {
+  # these are just "more comments" buttons
+  inherits(x = x, what = "praw.models.reddit.more.MoreComments")
+}) %>% 
+  map_dfr(.id = "index", .f = function(x, y) {
+    tibble(
+      id = x$id,
+      body = x$body,
+      score = x$score,
+      # sometimes authors are NULL for some reason
+      author = ifelse(test = is.null(x$author$name), yes = NA, no = x$author$name)
+    )
+  }) %>% 
+  readr::write_rds(path = "r_coms.rds")
 ```
 
 
 ```{r}
-r_coms <- readr::read_rds(path = "r_coms.rds")
+text_df <- readr::read_rds(path = "r_coms.rds") %>% 
+  tidyr::separate_rows(
+    body,
+    sep = "\n\n"
+  ) %>% 
+  group_by(id) %>% 
+  mutate(line = 1:n()) 
+
+text_df %>% 
+  unnest_tokens(output = word, input = body)
 ```
 
 

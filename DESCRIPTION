@@ -11,6 +11,7 @@ Imports:
   rtweet,
   readr,
   tidyverse,
-  purrr
+  purrr,
+  tidytext
 Remotes:
   tidyverse/purrr
