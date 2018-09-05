@@ -1,5 +1,5 @@
 --- 
-title: "Feelgood Managers und 'Bullshit Jobs'"
+title: "'Bullshit Jobs'"
 author: 
   - name: "Marco Blank"
     affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
@@ -18,7 +18,7 @@ author:
   - name: "Amelie Tihlarik"
     affiliation: "Friedrich-Alexander Universität Erlangen-Nürnberg (FAU)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-bibliography: held_library.bib
+bibliography: soztag_fgm.bib
 editor_options: 
   chunk_output_type: console
 ---
