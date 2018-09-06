@@ -45,7 +45,7 @@ editor_options:
 source("setup.R")
 ```
 
-# Bullshit Jobs als Pragmatische Moralkritik
+# Pragmatische Moralkritik
 
 <div class="alert alert-warning">
 **Entwurf**: Folgendes ist ziemlich lose gewirkt.
@@ -127,9 +127,51 @@ map2_dfr(
   readr::write_rds(path = "r_coms.rds")
 ```
 
+Im Sinne einer methodischen Triangulation ergänzen wir Graebers anekdotische Empirie durch eine quantitative, "large N" Textanalyse von im Web veröffentlichen Kommentaren zu "Bullshit Jobs".
 
 ```{r}
-td_coms <- readr::read_rds(path = "r_coms.rds") %>% 
+r_coms <- readr::read_rds(path = "r_coms.rds")
+```
+
+Vor allem aus forschungspraktischen Gründen nutzen wir hierzu Einträge auf dem Social News Aggregator [reddit.com](http:://www.reddit.com):
+Die Plattform bietet für Forschende großzügige Nutzungsbedingungen, und ist durch eine ausgereifte API mit entsprechendem Python Package gut erschlossen [@BoePythonRedditAPI2016].
+So war es möglich in recht knapper Zeit **`r nrow(r_coms)`** Volltext-Kommentare von **`r length(unique(r_coms$author))`** unterschiedlichen Nutzernamen zu **`r length(unique(r_coms$submission_id))`** Einreichungen in einer Vollerhebung zu sammeln.
+
+In der Interpretation der unten stehende Ergebnisse sollten einige Vor- und Nachteile der reddit-Daten berücksichtig werden.
+
+**Vorteile**:
+
+- Die auf reddit übliche Anonymität und Offenheit sollte die von Graeber befürchtete soziale Erwünschtheit der Antworten deutlich dämpfen.
+  Tatsächlich finden sich in den Kommentaren einzelne offene Beschreibungen der eigenen Arbeit als sinnlos.
+- Im Unterschied zu Einträgen auf anderen sozialen Medien (etwa Twitter), sind die Einlassungen auf reddit länger und enthalten typischerweise umfangreiche Einschätzungen und Bewertungen.
+  Reine "link posts" gibt es in den Kommentaren kaum.
+- Alle Kommentare sind abgegeben auf Einreichungen ("Threads"), die explizit Bullshit Jobs im Sinne Graebers thematisieren, oft mit Nennung des Buches.
+
+
+**Nachteile**:
+
+- Zwar sind alle Einreichungen zum Thema Bullshit Jobs, allerdings sind die entsprechenden Links zumeist *nicht* das tatsächliche Buch, sondern zu Besprechungen, hier vor allem zu einem entsprechenden Artikel auf [wired.co.uk](https://www.wired.co.uk/article/bullshit-jobs-david-graeber-review) [@UpchurchForgetfearsautomation2018].
+  Es muss daher davon ausgegangen werden, dass viele Kommentatoren bestenfalls den Artikel, nicht jedoch das Buch gelesen haben.
+- Der Artikel behandelt zwar mehrere Aspekte des Buches, die Überschrift ("Forget fears of automation, your job is probably bullshit anyway") und Schlussfolgerung verengt die Thesen Buches jedoch auf technologischen Wandel und den Vorschlag eines bedingungslosen Grundeinkommens ("universal basic income", UBI).
+  Viele der Kommentare beschäftigen sich dann auch eher mit diesen Themen, als einer breiteren Auseinandersetzung mit den "bullshit jobs".
+- Wie auch Graebers Gesprächspartner sind die Kommentatoren auf reddit stark selbstselektiert.
+  Vermutlich sind die Kommentatoren jünger, technik-affiner und anglo-amerikanischer als ein Bevölkerungsquerschnitt.
+- Auf Besonderheiten der europäischen oder gar deutschen Situation können mit den Daten keine Rückschlusse gezogen werden.
+
+
+### Analyse
+
+<div class="alert alert-warning">
+**Entwurf**: Die folgende Analyse ist stark kursorisch und vorläufig!
+</div>
+
+Zunächst wurden Kommentare in Zeilen, und dann mittels des [tidytext](https://www.tidytextmining.com) package in einzelne Wörter tokenisiert [@SilgeTextMining].
+Zudem wurden Synonyme des oft diskutierten UBIs ersetzt.[^Eine umfassendere, programmatische Ersetzung von weiteren Synonymen wäre sinnvoll, ist hier jedoch nicht erfolgt.]
+Nach der Entfernung von Stoppwörtern ("and", "it", etc.) wurden die verbleibenden Wörter mittels des `TreeTagger` Programms wie empfohlen probabilistisch lemmaisiert [@SchmidTreetaggerlanguageindependent1995].
+
+
+```{r}
+td_coms <- r_coms %>% 
   tidyr::separate_rows(
     body,
     sep = "\n\n"
@@ -170,7 +212,9 @@ td_coms <- td_coms %>%
 # TODO replacing with more common synonyms via WordNet might be even better, http://www.bernhardlearns.com/2017/04/cleaning-words-with-r-stemming.html
 ```
 
-```{r}
+Es verbleiben über **`r nrow(td_coms)`** Beobachtungen von **`r length(unique(td_coms$word))`** unikalen Wörter, darunter **`r count(x = td_coms, word, sort = TRUE) %>% filter(n > 10) %>% nrow()`** mit mehr als 10 Nennungen.
+
+```{r, fig.cap="Unigram der über 300 Mal genannten Wörter"}
 count(x = td_coms, word, sort = TRUE) %>% 
   filter(n > 300) %>% 
   mutate(word = reorder(word, n)) %>% 
@@ -179,6 +223,9 @@ count(x = td_coms, word, sort = TRUE) %>%
   xlab(NULL) + 
   coord_flip()
 ```
+
+Bereits aus dieser einfachen Zusammenfassung ergibt sich der starke Fokus der Reaktionen auf Automatisierung (`automation`, `robot`, `automated`), das UBI (`ubi`) sowie, zu einem geringeren Grad, grundsätzlichere Konzepte der Gegenwart (`society`, `company`, `government`, `wealth`).
+Aus der kursorischen Betrachtung einiger Kommentare ergibt sich, das Automatisierung hier keinesfalls nur, oder überwiegend als Bedrohung betrachtet wird, sondern durchaus als "Bullshit"-befreiende Technologien.
 
 
 # Feelgood Management
