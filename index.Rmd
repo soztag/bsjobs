@@ -260,6 +260,10 @@ td_coms <- readr::read_rds(path = "r_coms.rds") %>%
 # lemmatization
 if (FALSE) {
   # only run this locally, where treetagger is available
+  # TODO would be better to do this with proper dep management apt get and homebrew
+  withr::with_dir(
+    new = "treetagger/",
+    code = processx::run(command = "sh", args = "install-tagger.sh"))
   textstem::make_lemma_dictionary(
   td_coms$word,
   engine = "treetagger",
