@@ -5,6 +5,14 @@
 _site/
 index_cache/
 index_files/
+treetagger/cmd
+treetagger/bin
+treetagger/COPYRIGHT
+treetagger/doc
+treetagger/lib
+treetagger/FILES
+treetagger/README
+treetagger/README.script
 praw.ini
 *.pyc
 .DS_Store
