@@ -1,15 +1,15 @@
-name: Feelgood Managers and BS Jobs
+name: BS Jobs
 navbar:
-  title: Feelgood Managers
+  title: Bullshit Jobs
   right:
   - icon: fa-university
     menu:
     - text: Institut für Soziologie
-      href: https://www.soziologie.phil.fau.de)
+      href: https://www.soziologie.phil.fau.de
     - text: Nuremberg Campus of Technology
       href: https://www.ncatec.de
   - icon: fa-github
-    href: https://github.com/soztag/sublab
+    href: https://github.com/soztag/bsjobs
 output:
   html_document:
     theme: cosmo
