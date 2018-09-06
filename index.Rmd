@@ -211,7 +211,16 @@ Twitter hat kürzlich die Bedingungen ihrer API geändert; frei verfügbar sind 
 
 ## reddit comments
 
+[@GraeberBullshitJobsTheory2018] operationalisiert "Bullshit Jobs" als *subjektives* Konzept, also ausgehend von der Selbsteinschätzung der sozialen Nützlichkeit der eigenen Arbeit.
+Zudem kann "Bullshit Jobs" als Moralkritik unser Lebens- und Wirtschaftsweise verstanden werden, und damit zunächst unabhängig von einer empirischen Falsifizierbarkeit solcher "unnützen"
+
 ```{r import_via_praw, eval=FALSE, include=FALSE}
+library(RedditExtractoR)
+urls <- RedditExtractoR::reddit_urls(search_terms = "'bullshit jobs'", cn_threshold = 1) %>% 
+  as_tibble() %>% 
+  select(title, subreddit, URL) %>% 
+  mutate(submission_id = map_chr(.x = stringr::str_split(string = urls$URL, pattern = "/"), 7))
+
 library(reticulate)
 os <- import(module = "os")  # just to access the os via python and figure out current wd
 checkmate::assert_true(x = getwd() == os$getcwd()) 
@@ -220,19 +229,29 @@ praw <- import(module = "praw")
 # as per https://praw.readthedocs.io/en/latest/getting_started/configuration/environment_variables.html
 py_objs <- py_run_file(file = "praw.py", convert = TRUE)
 
-discard(.x = py_objs$res, .p = function(x) {
-  # these are just "more comments" buttons
-  inherits(x = x, what = "praw.models.reddit.more.MoreComments")
-}) %>% 
-  map_dfr(.id = "index", .f = function(x, y) {
-    tibble(
-      id = x$id,
-      body = x$body,
-      score = x$score,
-      # sometimes authors are NULL for some reason
-      author = ifelse(test = is.null(x$author$name), yes = NA, no = x$author$name)
-    )
-  }) %>% 
+# loop over all urls
+map2_dfr(
+  .x = urls$submission_id,
+  .y = urls$title, 
+  .f = function(submission_id, submission_title) {
+    py_objs$getAllForOneURL(submission_id) %>% 
+      discard(.p = function(x) {
+        # these are just "more comments" buttons
+        inherits(x = x, what = "praw.models.reddit.more.MoreComments")
+      }) %>% 
+      map_dfr(.id = "index", .f = function(x, y) {
+        tibble(
+          submission_id = submission_id,
+          id = x$id,
+          body = x$body,
+          score = x$score,
+          # sometimes authors are NULL for some reason
+          author = ifelse(test = is.null(x$author$name), yes = NA, no = x$author$name),
+          submission_title = submission_title
+        )
+      })
+  }
+) %>% 
   readr::write_rds(path = "r_coms.rds")
 ```
 
@@ -268,8 +287,8 @@ if (FALSE) {
   td_coms$word,
   engine = "treetagger",
   lang = "en"
-) %>% 
-  readr::write_rds(path = "dict.rds")
+  ) %>% 
+    readr::write_rds(path = "dict.rds")
 }
 dict <- readr::read_rds(path = "dict.rds")
 
@@ -281,7 +300,7 @@ td_coms <- td_coms %>%
 
 ```{r}
 count(x = td_coms, word, sort = TRUE) %>% 
-  filter(n > 200) %>% 
+  filter(n > 300) %>% 
   mutate(word = reorder(word, n)) %>% 
   ggplot(aes(word, n)) +
   geom_col() +

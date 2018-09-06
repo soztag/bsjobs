@@ -25,4 +25,5 @@ def getAll(r, submissionId, verbose=True):
     getSubComments(comment, commentsList, verbose=verbose)
   return commentsList
 
-res = getAll(reddit, "8m05sq")
+def getAllForOneURL(submissionId):
+  return getAll(reddit, submissionId)
