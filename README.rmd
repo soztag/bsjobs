@@ -2,8 +2,8 @@
 title: About
 ---
 
-[![Build Status](https://travis-ci.com/soztag/fgmbs.svg?token=VqJKxxUwxXFJyYyqJx7G&branch=master)](https://travis-ci.com/soztag/fgmbs)
+[![Build Status](https://travis-ci.com/soztag/bsjobs.svg?branch=master)](https://travis-ci.com/soztag/bsjobs)
 
 ## Abstract
 
-Entwürfe zu Feelgood Managern und "bullshit jobs" [@GraeberBullshitJobsTheory2018].
+Entwürfe zu "Bullshit Jobs" [@GraeberBullshitJobsTheory2018] vom **Explorathon** des Lehrstuhls für Soziologie (Technik - Arbeit - Gesellschaft) an der Friedrich-Alexander Universität Erlangen-Nürnberg (FAU) im September 2018.

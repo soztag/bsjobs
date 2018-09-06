@@ -23,12 +23,163 @@ editor_options:
   chunk_output_type: console
 ---
 
+<div class="jumbotron" style="color:white; background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(img/902px-Punishment_sisyph.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+  <h2>Bullshit Jobs</h1>
+  <p>Eine arbeitssoziologische Reflektion</p>
+  <p>
+    <span class="label label-info">
+      #bsjobs
+    </span>
+  </p>
+  <p><small><sub>
+    Image Credit: [*Sisyphus*](https://en.wikipedia.org/wiki/File:Punishment_sisyph.jpg) (1548--1549) by Titian, Prado Museum, Madrid, Spain
+  </sub></small></p>
+</div>
+
 ```{r, child="README.rmd"}
 ```
+
+---
 
 ```{r setup, cache = FALSE, include = FALSE}
 source("setup.R")
 ```
+
+# Bullshit Jobs als Pragmatische Moralkritik
+
+<div class="alert alert-warning">
+**Entwurf**: Folgendes ist ziemlich lose gewirkt.
+</div>
+
+@GraeberBullshitJobsTheory2018 operationalisiert "Bullshit Jobs" als *subjektives* Konzept, also ausgehend von der Selbsteinschätzung der sozialen Nützlichkeit der eigenen Arbeit.
+
+Zudem kann "Bullshit Jobs" als Moralkritik unserer Wirtschaftsweise verstanden werden.
+"Bullshit Jobs" wäre dann kein a posteriori positiver Befund über die *Verbreitung* von vermeintlich "unnützer" oder "schädlicher" Arbeit, sondern --- wohlwollend gelesen --- ein axiomatischer Geltungsanspruch zu *guter* Arbeit.
+Gute Arbeit wäre dann subjektiv als anderen Menschen dienlich empfundene Arbeit.
+
+Graeber reisst die Probleme dieser augenscheinlich paradoxen Definition --- *subjektiv* anderen *nützliche* Arbeit --- an, kann sie aber nicht abschließend lösen.
+Zwischen den gleichermaßen tautologischen "Nutzen"definition der Neoklassik einerseits (Nutzen als Zahlungsbereitschaft) und des Marxismus andererseits (Gebrauchswert als situativ und qualitativ), kann Graebers hemdsärmliche Operationalisierung aber als erfrischend pragmatischer Versuch gelten.
+
+*Wenn* die Kritik der Bullshit Jobs Menschen treffend erscheint, um über ihre und die Arbeit anderer zu reflektieren, dann kann sie zumindest *möglicherwiese* im Sinne eines "*ökologischen*" (engl. "ecological") Pragmatismus gelten [vgl. @Peirce-1903].
+In James' prägnanter Formulierung haben Bullshit Jobs den "Barwert ihrer Wahrheit" [-@JamesPragmatismNewName1907: 200] eingelöst, wenn sie Menschen befähigen, *alternative* und *gangbare* wirtschaftliche Arrangements zu fordern.
+Bullshit Jobs --- erneut wohlwollend gelesen --- könnten dann als charakteristisch kontingente, vorläufige und *erstrebende* Forderung eines amerikanischen Pragmatismus verstanden werden [vgl. @Dewey-1916].
+Im Unterschied zum (lose gesprochenen) Marxismus, sind Bullshit Jobs nicht "entfremdend" [@Marx-1867-aa], da sie einem *konstanten* menschlichen Gattungswesen widersprechen [vgl. @HaugDoppelcharakterArbeit], oder weil sie einem angenommenen, abschließend menschengerechten Arrangement widersprechen, sondern weil sie vor dem *konkreten*, gegenwärtigen Hintergrund technologischer und organisationeller Innovation als unnütz erkannt werden können. 
+Ebenso wären Bullshit Jobs nicht schlicht eine (mutmaßlich durch staatliche Verzerrung verursachte) Abweichung von kompetitiven Märkten, oder definitorische Unmöglichkeiten (da nicht Pareto-verbessernd) einer katallaktischen Ordnung [@Hayek-1960], wie aus neoklassischer oder libertärer Sicht argumentiert werden könnte.
+Sie blieben trotz und unabhängig von ihrer gegenwärtigen ökonomischen Rationalität irrsinnig, da es subjektiv nützlichere Tätigkeiten gibt, und das Preissystem damit seiner vermittelnden Aufgabe offenkundig nicht nachkommt.
+
+Hier zeigt sich eine weitere mögliche pragmatische Qualität der Bullshit Jobs Kritik:
+Graeber kritisiert existierende Jobs in Hinblick auf konkrete Technologien und Organisation die selbige ersetzen könnten, und *im Vergleich* zu anderer, existierender, *nützlicherer* Arbeit, von der mehr zu erledigen wäre, oder höher geschätzt und entlohnt werden wollen.
+
+Pragmatisch gelesen steht Graebers Kritik damit entgegen etablierten Konzepten zur guten *Gestaltung* von Arbeitsbedingungen, und stellt auf den subjektiv erfahrene Inhalt eines Jobs ab.
+Überrasschenderweise ähnelt Graeber damit unter anderem der Moraltheorie --- nicht der Ökonomie --- von @Smiththeorymoralsentiments1822.
+
+
+## Kommentare auf *reddit*
+
+Aus zweierlei Sicht ist es sinnvoll, öffentliche Reaktionen auf Graebers "Bullshit Jobs" näher zu untersuchen.
+
+1. Zum einen erfordert Graeber subjektive Operationalisierung von Bullshit Jobs weitere Untermauerung.
+     Graebers selbst vorgetragene Empirie ist überwiegend anektodisch, eklatant selbst-selektiert (Korrespondenz *an* den Autor) und sowohl qualitativ als auch quantitativ dünn.
+    Sollten tatsächlich viele Menschen ihre Arbeit als nutzlos empfinden, dann sollte sich dies in öffentlichen Reaktionen niederschlagen, jedenfalls wenn Anonymitität gewährleistet ist.
+    Da auch die Definition von Bullshit Jobs lückenhaft ist, ist auch von Interesse *welche Qualitäten* Arbeit nutzlos erscheinen lassen.
+2. Auch der ökologisch-pragmatische *Nutzen* sollte sich in öffentlichen Reaktionen niederschlagen.
+     Zwar kann eine Moralkritik nicht a posteriori positiv überprüft werden, im pragmatischen Sinne sollte sie aber nach einiger Erläuterung [wie in @GraeberBullshitJobsTheory2018] Menschen dienlich sein, alternative Arrangements zu fordern.
+     Es gilt insofern zu überprüfen ob, und in welcher Weise, die Kritik der Bullshit Jobs verfängt.
+
+```{r import_via_praw, eval=FALSE, include=FALSE}
+library(RedditExtractoR)
+urls <- RedditExtractoR::reddit_urls(search_terms = "'bullshit jobs'", cn_threshold = 1) %>% 
+  as_tibble() %>% 
+  select(title, subreddit, URL) %>% 
+  mutate(submission_id = map_chr(.x = stringr::str_split(string = urls$URL, pattern = "/"), 7))
+
+library(reticulate)
+os <- import(module = "os")  # just to access the os via python and figure out current wd
+checkmate::assert_true(x = getwd() == os$getcwd()) 
+praw <- import(module = "praw")
+# this calls credentials stored in praw.ini, but gitignored here
+# as per https://praw.readthedocs.io/en/latest/getting_started/configuration/environment_variables.html
+py_objs <- py_run_file(file = "praw.py", convert = TRUE)
+
+# loop over all urls
+map2_dfr(
+  .x = urls$submission_id,
+  .y = urls$title, 
+  .f = function(submission_id, submission_title) {
+    py_objs$getAllForOneURL(submission_id) %>% 
+      discard(.p = function(x) {
+        # these are just "more comments" buttons
+        inherits(x = x, what = "praw.models.reddit.more.MoreComments")
+      }) %>% 
+      map_dfr(.id = "index", .f = function(x, y) {
+        tibble(
+          submission_id = submission_id,
+          id = x$id,
+          body = x$body,
+          score = x$score,
+          # sometimes authors are NULL for some reason
+          author = ifelse(test = is.null(x$author$name), yes = NA, no = x$author$name),
+          submission_title = submission_title
+        )
+      })
+  }
+) %>% 
+  readr::write_rds(path = "r_coms.rds")
+```
+
+
+```{r}
+td_coms <- readr::read_rds(path = "r_coms.rds") %>% 
+  tidyr::separate_rows(
+    body,
+    sep = "\n\n"
+  ) %>% 
+  mutate(body = stringi::stri_replace_all(
+    # kind of hacky, but these terms just screw up the results otherwise
+    str = body, 
+    fixed = c("universal income", "basic income", "universal basic income"), 
+    replacement = "ubi", 
+    merge = FALSE, 
+    vectorize_all = FALSE)
+  ) %>% 
+  group_by(id) %>% 
+  mutate(line = 1:n()) %>% 
+  ungroup() %>% 
+  unnest_tokens(output = word, input = body, format = "text") %>% 
+  anti_join(stop_words)
+
+# lemmatization
+if (FALSE) {
+  # only run this locally, where treetagger is available
+  # TODO would be better to do this with proper dep management apt get and homebrew
+  withr::with_dir(
+    new = "treetagger/",
+    code = processx::run(command = "sh", args = "install-tagger.sh"))
+  textstem::make_lemma_dictionary(
+  td_coms$word,
+  engine = "treetagger",
+  lang = "en"
+  ) %>% 
+    readr::write_rds(path = "dict.rds")
+}
+dict <- readr::read_rds(path = "dict.rds")
+
+td_coms <- td_coms %>% 
+  mutate(word = textstem::lemmatize_strings(x = word, dictionary = dict))
+
+# TODO replacing with more common synonyms via WordNet might be even better, http://www.bernhardlearns.com/2017/04/cleaning-words-with-r-stemming.html
+```
+
+```{r}
+count(x = td_coms, word, sort = TRUE) %>% 
+  filter(n > 300) %>% 
+  mutate(word = reorder(word, n)) %>% 
+  ggplot(aes(word, n)) +
+  geom_col() +
+  xlab(NULL) + 
+  coord_flip()
+```
+
 
 # Feelgood Management
 
@@ -205,109 +356,6 @@ Im Vergleich wurde zum Thema Bullshit Jobs **`r n_terms["bs"]`** Mal getweetet.
 Hier ist eventuelle eine Sentiment-Analyse o.ä. möglich.
 
 Twitter hat kürzlich die Bedingungen ihrer API geändert; frei verfügbar sind nur noch Daten der letzten 6-9 Tage.
-
-
-# Bullshit Jobs
-
-## reddit comments
-
-[@GraeberBullshitJobsTheory2018] operationalisiert "Bullshit Jobs" als *subjektives* Konzept, also ausgehend von der Selbsteinschätzung der sozialen Nützlichkeit der eigenen Arbeit.
-Zudem kann "Bullshit Jobs" als Moralkritik unser Lebens- und Wirtschaftsweise verstanden werden, und damit zunächst unabhängig von einer empirischen Falsifizierbarkeit solcher "unnützen"
-
-```{r import_via_praw, eval=FALSE, include=FALSE}
-library(RedditExtractoR)
-urls <- RedditExtractoR::reddit_urls(search_terms = "'bullshit jobs'", cn_threshold = 1) %>% 
-  as_tibble() %>% 
-  select(title, subreddit, URL) %>% 
-  mutate(submission_id = map_chr(.x = stringr::str_split(string = urls$URL, pattern = "/"), 7))
-
-library(reticulate)
-os <- import(module = "os")  # just to access the os via python and figure out current wd
-checkmate::assert_true(x = getwd() == os$getcwd()) 
-praw <- import(module = "praw")
-# this calls credentials stored in praw.ini, but gitignored here
-# as per https://praw.readthedocs.io/en/latest/getting_started/configuration/environment_variables.html
-py_objs <- py_run_file(file = "praw.py", convert = TRUE)
-
-# loop over all urls
-map2_dfr(
-  .x = urls$submission_id,
-  .y = urls$title, 
-  .f = function(submission_id, submission_title) {
-    py_objs$getAllForOneURL(submission_id) %>% 
-      discard(.p = function(x) {
-        # these are just "more comments" buttons
-        inherits(x = x, what = "praw.models.reddit.more.MoreComments")
-      }) %>% 
-      map_dfr(.id = "index", .f = function(x, y) {
-        tibble(
-          submission_id = submission_id,
-          id = x$id,
-          body = x$body,
-          score = x$score,
-          # sometimes authors are NULL for some reason
-          author = ifelse(test = is.null(x$author$name), yes = NA, no = x$author$name),
-          submission_title = submission_title
-        )
-      })
-  }
-) %>% 
-  readr::write_rds(path = "r_coms.rds")
-```
-
-
-```{r}
-td_coms <- readr::read_rds(path = "r_coms.rds") %>% 
-  tidyr::separate_rows(
-    body,
-    sep = "\n\n"
-  ) %>% 
-  mutate(body = stringi::stri_replace_all(
-    # kind of hacky, but these terms just screw up the results otherwise
-    str = body, 
-    fixed = c("universal income", "basic income", "universal basic income"), 
-    replacement = "ubi", 
-    merge = FALSE, 
-    vectorize_all = FALSE)
-  ) %>% 
-  group_by(id) %>% 
-  mutate(line = 1:n()) %>% 
-  ungroup() %>% 
-  unnest_tokens(output = word, input = body, format = "text") %>% 
-  anti_join(stop_words)
-
-# lemmatization
-if (FALSE) {
-  # only run this locally, where treetagger is available
-  # TODO would be better to do this with proper dep management apt get and homebrew
-  withr::with_dir(
-    new = "treetagger/",
-    code = processx::run(command = "sh", args = "install-tagger.sh"))
-  textstem::make_lemma_dictionary(
-  td_coms$word,
-  engine = "treetagger",
-  lang = "en"
-  ) %>% 
-    readr::write_rds(path = "dict.rds")
-}
-dict <- readr::read_rds(path = "dict.rds")
-
-td_coms <- td_coms %>% 
-  mutate(word = textstem::lemmatize_strings(x = word, dictionary = dict))
-
-# TODO replacing with more common synonyms via WordNet might be even better, http://www.bernhardlearns.com/2017/04/cleaning-words-with-r-stemming.html
-```
-
-```{r}
-count(x = td_coms, word, sort = TRUE) %>% 
-  filter(n > 300) %>% 
-  mutate(word = reorder(word, n)) %>% 
-  ggplot(aes(word, n)) +
-  geom_col() +
-  xlab(NULL) + 
-  coord_flip()
-```
-
 
 
 # Bibliografie
