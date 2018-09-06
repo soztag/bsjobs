@@ -243,17 +243,36 @@ td_coms <- readr::read_rds(path = "r_coms.rds") %>%
     body,
     sep = "\n\n"
   ) %>% 
+  mutate(body = stringi::stri_replace_all(
+    # kind of hacky, but these terms just screw up the results otherwise
+    str = body, 
+    fixed = c("universal income", "basic income", "universal basic income"), 
+    replacement = "ubi", 
+    merge = FALSE, 
+    vectorize_all = FALSE)
+  ) %>% 
   group_by(id) %>% 
   mutate(line = 1:n()) %>% 
   ungroup() %>% 
   unnest_tokens(output = word, input = body, format = "text") %>% 
-  anti_join(stop_words) %>% 
-  mutate(
-    word = textstem::lemmatize_strings(
-      x = word, 
-      dictionary = textstem::make_lemma_dictionary(word, engine = "hunspell")
-    )
-  )
+  anti_join(stop_words)
+
+# lemmatization
+if (FALSE) {
+  # only run this locally, where treetagger is available
+  textstem::make_lemma_dictionary(
+  td_coms$word,
+  engine = "treetagger",
+  lang = "en"
+) %>% 
+  readr::write_rds(path = "dict.rds")
+}
+dict <- readr::read_rds(path = "dict.rds")
+
+td_coms <- td_coms %>% 
+  mutate(word = textstem::lemmatize_strings(x = word, dictionary = dict))
+
+# TODO replacing with more common synonyms via WordNet might be even better, http://www.bernhardlearns.com/2017/04/cleaning-words-with-r-stemming.html
 ```
 
 ```{r}
@@ -265,7 +284,6 @@ count(x = td_coms, word, sort = TRUE) %>%
   xlab(NULL) + 
   coord_flip()
 ```
-
 
 
 
