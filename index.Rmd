@@ -168,7 +168,7 @@ In der Interpretation der unten stehende Ergebnisse sollten einige Vor- und Nach
 </div>
 
 Zunächst wurden Kommentare in Zeilen, und dann mittels des [tidytext](https://www.tidytextmining.com) package in einzelne Wörter tokenisiert [@SilgeTextMining].
-Zudem wurden Synonyme des oft diskutierten UBIs ersetzt.[^Eine umfassendere, programmatische Ersetzung von weiteren Synonymen wäre sinnvoll, ist hier jedoch nicht erfolgt.]
+Zudem wurden Synonyme des oft diskutierten UBIs ersetzt.^[Eine umfassendere, programmatische Ersetzung von weiteren Synonymen wäre sinnvoll, ist hier jedoch nicht erfolgt.]
 Nach der Entfernung von Stoppwörtern ("and", "it", etc.) wurden die verbleibenden Wörter mittels des `TreeTagger` Programms wie empfohlen probabilistisch lemmaisiert [@SchmidTreetaggerlanguageindependent1995].
 
 
