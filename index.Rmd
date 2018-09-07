@@ -164,7 +164,7 @@ In der Interpretation der unten stehende Ergebnisse sollten einige Vor- und Nach
 ### Analyse
 
 <div class="alert alert-warning">
-**Entwurf**: Die folgende Analyse ist stark kursorisch und vorläufig!
+**Entwurf**
 </div>
 
 Zunächst wurden Kommentare in Zeilen, und dann mittels des [tidytext](https://www.tidytextmining.com) package in einzelne Wörter tokenisiert [@SilgeTextMining].
