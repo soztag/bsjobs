@@ -48,43 +48,45 @@ source("setup.R")
 # Pragmatische Moralkritik
 
 <div class="alert alert-warning">
-**Entwurf**: Folgendes ist ziemlich lose gewirkt.
+**Entwurf**
 </div>
 
-@GraeberBullshitJobsTheory2018 operationalisiert "Bullshit Jobs" als *subjektives* Konzept, also ausgehend von der Selbsteinschätzung der sozialen Nützlichkeit der eigenen Arbeit.
+@GraeberBullshitJobsTheory2018 definiert "Bullshit Jobs" als *subjektives* Konzept, also ausgehend von der Selbsteinschätzung der sozialen Nützlichkeit der eigenen Arbeit.
+Dies geht soweit, dass die Existenz dieser Tätigkeit moralisch abgelehnt wird.
+Aus dieser Perspektive kann das Phänomen Bullshit Jobs auch als Moralkritik unserer Wirtschaftsweise verstanden werden.
+Bullshit Jobs gelten dann nicht als a posteriori positiver Befund über die *Verbreitung* von vermeintlich "unnützer" oder "schädlicher" Arbeit, sondern --- wohlwollend gelesen --- ein axiomatischer Geltungsanspruch zu *guter* Arbeit.
+Gute Arbeit wäre dann als anderen Menschen dienlich empfundene Arbeit.
 
-Zudem kann "Bullshit Jobs" als Moralkritik unserer Wirtschaftsweise verstanden werden.
-"Bullshit Jobs" wäre dann kein a posteriori positiver Befund über die *Verbreitung* von vermeintlich "unnützer" oder "schädlicher" Arbeit, sondern --- wohlwollend gelesen --- ein axiomatischer Geltungsanspruch zu *guter* Arbeit.
-Gute Arbeit wäre dann subjektiv als anderen Menschen dienlich empfundene Arbeit.
+Graeber reißt die Widersprüche dieser Definition --- *subjektiv* anderen *nützliche* Arbeit --- an, kann sie aber nicht stringent auflösen.
+Zwischen den gleichermaßen tautologischen Definitionen der Neoklassik einerseits (Nutzen als Zahlungsbereitschaft) und des Marxismus andererseits (Gebrauchswert als situativ und qualitativ), kommt Graebers hemdsärmliche Operationalisierung aber als erfrischend pragmatischer Versuch daher.
 
-Graeber reisst die Probleme dieser augenscheinlich paradoxen Definition --- *subjektiv* anderen *nützliche* Arbeit --- an, kann sie aber nicht abschließend lösen.
-Zwischen den gleichermaßen tautologischen "Nutzen"definition der Neoklassik einerseits (Nutzen als Zahlungsbereitschaft) und des Marxismus andererseits (Gebrauchswert als situativ und qualitativ), kann Graebers hemdsärmliche Operationalisierung aber als erfrischend pragmatischer Versuch gelten.
-
-*Wenn* die Kritik der Bullshit Jobs Menschen treffend erscheint, um über ihre und die Arbeit anderer zu reflektieren, dann kann sie zumindest *möglicherwiese* im Sinne eines "*ökologischen*" (engl. "ecological") Pragmatismus gelten [vgl. @Peirce-1903].
-In James' prägnanter Formulierung haben Bullshit Jobs den "Barwert ihrer Wahrheit" [-@JamesPragmatismNewName1907: 200] eingelöst, wenn sie Menschen befähigen, *alternative* und *gangbare* wirtschaftliche Arrangements zu fordern.
-Bullshit Jobs --- erneut wohlwollend gelesen --- könnten dann als charakteristisch kontingente, vorläufige und *erstrebende* Forderung eines amerikanischen Pragmatismus verstanden werden [vgl. @Dewey-1916].
-Im Unterschied zum (lose gesprochenen) Marxismus, sind Bullshit Jobs nicht "entfremdend" [@Marx-1867-aa], da sie einem *konstanten* menschlichen Gattungswesen widersprechen [vgl. @HaugDoppelcharakterArbeit], oder weil sie einem angenommenen, abschließend menschengerechten Arrangement widersprechen, sondern weil sie vor dem *konkreten*, gegenwärtigen Hintergrund technologischer und organisationeller Innovation als unnütz erkannt werden können. 
-Ebenso wären Bullshit Jobs nicht schlicht eine (mutmaßlich durch staatliche Verzerrung verursachte) Abweichung von kompetitiven Märkten, oder definitorische Unmöglichkeiten (da nicht Pareto-verbessernd) einer katallaktischen Ordnung [@Hayek-1960], wie aus neoklassischer oder libertärer Sicht argumentiert werden könnte.
-Sie blieben trotz und unabhängig von ihrer gegenwärtigen ökonomischen Rationalität irrsinnig, da es subjektiv nützlichere Tätigkeiten gibt, und das Preissystem damit seiner vermittelnden Aufgabe offenkundig nicht nachkommt.
+*Wenn* die Kritik der Bullshit Jobs Menschen treffend erscheint, um über ihre und die Arbeit anderer zu reflektieren und eine moralische Unterscheidung zu treffen, dann kann sie *möglicherwiese* auch im Sinne eines "*ökologischen*" (engl. "ecological") Pragmatismus gelten [vgl. @Peirce-1903].
+In James' prägnanter Formulierung haben Bullshit Jobs den "Barwert ihrer Wahrheit" [-@JamesPragmatismNewName1907: 200] eingelöst, wenn sie Menschen befähigen, *alternative* und *gangbare* wirtschaftliche Arrangements einzufordern.
+Bullshit Jobs --- erneut wohlwollend gelesen --- könnten dann als charakteristisch kontingente, vorläufige und *erstrebende* Forderungen eines amerikanischen Pragmatismus verstanden werden [vgl. @Dewey-1916].
+Im Unterschied zum Marxismus sind Bullshit Jobs nicht "entfremdend" [@Marx-1867-aa].
+Das Konzept widerspricht einem *konstanten* menschlichen Gattungswesen [vgl. @HaugDoppelcharakterArbeit] und lehnt die Vorstellung eines überdauernden menschengerechten Arrangement von Arbeit ab.
+Stattdessen werden Bullshit Jobs vor dem Hintergrund *konkreter*, gegenwärtiger technologischer und organisationeller Innovation als unnütz erkannt.
+Ebenso sind Bullshit Jobs nicht schlicht eine (mutmaßlich durch staatliche Verzerrung verursachte) Abweichung von kompetitiven Märkten, oder definitorische Unmöglichkeiten (da nicht Pareto-verbessernd) einer katallaktischen Ordnung [@Hayek-1960], wie aus neoklassischer oder libertärer Sicht argumentiert werden könnte.
+Sie bleiben trotz und unabhängig von ihrer gegenwärtigen ökonomischen Rationalität irrsinnig, da es gleichzeitig subjektiv nützlichere Tätigkeiten *gibt*, und das Preissystem damit offenkundig nicht seiner vermittelnden Aufgabe nachkommt.
 
 Hier zeigt sich eine weitere mögliche pragmatische Qualität der Bullshit Jobs Kritik:
 Graeber kritisiert existierende Jobs in Hinblick auf konkrete Technologien und Organisation die selbige ersetzen könnten, und *im Vergleich* zu anderer, existierender, *nützlicherer* Arbeit, von der mehr zu erledigen wäre, oder höher geschätzt und entlohnt werden wollen.
-
-Pragmatisch gelesen steht Graebers Kritik damit entgegen etablierten Konzepten zur guten *Gestaltung* von Arbeitsbedingungen, und stellt auf den subjektiv erfahrene Inhalt eines Jobs ab.
+Pragmatisch gelesen steht Graebers Kritik damit entgegen etablierten Konzepten zur guten Gestaltung von Arbeitsbedingungen, und stellt auf den subjektiv erfahrene Inhalt eines Jobs ab.
 Überrasschenderweise ähnelt Graeber damit unter anderem der Moraltheorie --- nicht der Ökonomie --- von @Smiththeorymoralsentiments1822.
 
 
-## Kommentare auf *reddit*
+## Kommentare auf dem Social-News-Aggregator *"reddit"*
 
-Aus zweierlei Sicht ist es sinnvoll, öffentliche Reaktionen auf Graebers "Bullshit Jobs" näher zu untersuchen.
+Aus zweierlei Hinsicht ist es sinnvoll, öffentliche Reaktionen auf Graebers "Bullshit Jobs" näher zu untersuchen:
 
 1. Zum einen erfordert Graeber subjektive Operationalisierung von Bullshit Jobs weitere Untermauerung.
-     Graebers selbst vorgetragene Empirie ist überwiegend anektodisch, eklatant selbst-selektiert (Korrespondenz *an* den Autor) und sowohl qualitativ als auch quantitativ dünn.
-    Sollten tatsächlich viele Menschen ihre Arbeit als nutzlos empfinden, dann sollte sich dies in öffentlichen Reaktionen niederschlagen, jedenfalls wenn Anonymitität gewährleistet ist.
-    Da auch die Definition von Bullshit Jobs lückenhaft ist, ist auch von Interesse *welche Qualitäten* Arbeit nutzlos erscheinen lassen.
+     Graebers selbst vorgetragene Empirie ist überwiegend anektodisch, selbst-selektiert (durch E-Mail-Korrespondenz *an* den Autor) und sowohl qualitativ als auch quantitativ mangelhaft.
+    Die These: Sollten tatsächlich viele Menschen ihre Arbeit als nutzlos empfinden, dann sollte sich dies in öffentlichen Reaktionen niederschlagen, jedenfalls wenn Anonymitität gewährleistet ist.
+    Da auch die Definition von Bullshit Jobs lückenhaft ist, ist ebenso von Interesse *welche Qualitäten* Arbeit nutzlos erscheinen lassen.
+    
 2. Auch der ökologisch-pragmatische *Nutzen* sollte sich in öffentlichen Reaktionen niederschlagen.
-     Zwar kann eine Moralkritik nicht a posteriori positiv überprüft werden, im pragmatischen Sinne sollte sie aber nach einiger Erläuterung [wie in @GraeberBullshitJobsTheory2018] Menschen dienlich sein, alternative Arrangements zu fordern.
-     Es gilt insofern zu überprüfen ob, und in welcher Weise, die Kritik der Bullshit Jobs verfängt.
+     Zwar kann eine Moralkritik nicht a posteriori positiv überprüft werden, im pragmatischen Sinne sollte sie aber [wie in @GraeberBullshitJobsTheory2018] Menschen dienlich sein, dadurch alternative Arrangements *fordern zu können*.
+     Es gilt insofern zu überprüfen, ob und in welcher Weise, die Kritik der Bullshit Jobs verfängt.
 
 ```{r import_via_praw, eval=FALSE, include=FALSE}
 library(RedditExtractoR)
@@ -142,7 +144,7 @@ In der Interpretation der unten stehende Ergebnisse sollten einige Vor- und Nach
 **Vorteile**:
 
 - Die auf reddit übliche Anonymität und Offenheit sollte die von Graeber befürchtete soziale Erwünschtheit der Antworten deutlich dämpfen.
-  Tatsächlich finden sich in den Kommentaren einzelne offene Beschreibungen der eigenen Arbeit als sinnlos.
+  Tatsächlich finden sich in den Kommentaren einzelne offene Beschreibungen der eigenen Arbeit als "sinnlos".
 - Im Unterschied zu Einträgen auf anderen sozialen Medien (etwa Twitter), sind die Einlassungen auf reddit länger und enthalten typischerweise umfangreiche Einschätzungen und Bewertungen.
   Reine "link posts" gibt es in den Kommentaren kaum.
 - Alle Kommentare sind abgegeben auf Einreichungen ("Threads"), die explizit Bullshit Jobs im Sinne Graebers thematisieren, oft mit Nennung des Buches.
@@ -150,10 +152,10 @@ In der Interpretation der unten stehende Ergebnisse sollten einige Vor- und Nach
 
 **Nachteile**:
 
-- Zwar sind alle Einreichungen zum Thema Bullshit Jobs, allerdings sind die entsprechenden Links zumeist *nicht* das tatsächliche Buch, sondern zu Besprechungen, hier vor allem zu einem entsprechenden Artikel auf [wired.co.uk](https://www.wired.co.uk/article/bullshit-jobs-david-graeber-review) [@UpchurchForgetfearsautomation2018].
+- Zwar sind alle Einreichungen zum Thema Bullshit Jobs, allerdings sind die entsprechenden Links zumeist *nicht* das tatsächliche Buch, sondern zu Besprechungen, hier vor allem zu einem Artikel auf [wired.co.uk](https://www.wired.co.uk/article/bullshit-jobs-david-graeber-review) [@UpchurchForgetfearsautomation2018].
   Es muss daher davon ausgegangen werden, dass viele Kommentatoren bestenfalls den Artikel, nicht jedoch das Buch gelesen haben.
 - Der Artikel behandelt zwar mehrere Aspekte des Buches, die Überschrift ("Forget fears of automation, your job is probably bullshit anyway") und Schlussfolgerung verengt die Thesen Buches jedoch auf technologischen Wandel und den Vorschlag eines bedingungslosen Grundeinkommens ("universal basic income", UBI).
-  Viele der Kommentare beschäftigen sich dann auch eher mit diesen Themen, als einer breiteren Auseinandersetzung mit den "bullshit jobs".
+  Viele der Kommentare beschäftigen sich dann auch eher mit diesen Themen, als einer breiteren Auseinandersetzung mit Bullshit Jobs und der eigenen Arbeitserfahrung.
 - Wie auch Graebers Gesprächspartner sind die Kommentatoren auf reddit stark selbstselektiert.
   Vermutlich sind die Kommentatoren jünger, technik-affiner und anglo-amerikanischer als ein Bevölkerungsquerschnitt.
 - Auf Besonderheiten der europäischen oder gar deutschen Situation können mit den Daten keine Rückschlusse gezogen werden.
@@ -225,7 +227,7 @@ count(x = td_coms, word, sort = TRUE) %>%
 ```
 
 Bereits aus dieser einfachen Zusammenfassung ergibt sich der starke Fokus der Reaktionen auf Automatisierung (`automation`, `robot`, `automated`), das UBI (`ubi`) sowie, zu einem geringeren Grad, grundsätzlichere Konzepte der Gegenwart (`society`, `company`, `government`, `wealth`).
-Aus der kursorischen Betrachtung einiger Kommentare ergibt sich, das Automatisierung hier keinesfalls nur, oder überwiegend als Bedrohung betrachtet wird, sondern durchaus als "Bullshit"-befreiende Technologien.
+Aus der oberflächlichen Betrachtung einiger Kommentare ergibt sich, dass Automatisierung hier keinesfalls nur, oder überwiegend als Bedrohung betrachtet wird, sondern durchaus als "Bullshit"-befreiende Technologien.
 
 
 # Feelgood Management
