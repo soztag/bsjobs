@@ -188,7 +188,18 @@ td_coms <- r_coms %>%
   mutate(line = 1:n()) %>% 
   ungroup() %>% 
   unnest_tokens(output = word, input = body, format = "text") %>% 
-  anti_join(stop_words)
+  anti_join(stop_words) %>% 
+  tidyr::separate_rows(  # separate out sepcial charcs
+    word,
+    sep = "_"
+  ) %>% 
+  filter(
+    is.na(as.numeric(word)),
+    str_length(word) > 1
+  ) %>% 
+  mutate(
+    word = stringr::str_extract(word, "[a-z']+")
+  )
 
 # lemmatization
 if (FALSE) {
@@ -207,7 +218,15 @@ if (FALSE) {
 dict <- readr::read_rds(path = "dict.rds")
 
 td_coms <- td_coms %>% 
-  mutate(word = textstem::lemmatize_strings(x = word, dictionary = dict))
+  mutate(
+    word = textstem::lemmatize_strings(x = word, dictionary = dict),
+    submission_title = stringr::str_trunc(
+      string = submission_title,
+      width = 15,
+      side = "right",
+      ellipsis = "..."
+    )
+  )
 
 # TODO replacing with more common synonyms via WordNet might be even better, http://www.bernhardlearns.com/2017/04/cleaning-words-with-r-stemming.html
 ```
@@ -226,6 +245,39 @@ count(x = td_coms, word, sort = TRUE) %>%
 
 Bereits aus dieser einfachen Zusammenfassung ergibt sich der starke Fokus der Reaktionen auf Automatisierung (`automation`, `robot`, `automated`), das UBI (`ubi`) sowie, zu einem geringeren Grad, grundsätzlichere Konzepte der Gegenwart (`society`, `company`, `government`, `wealth`).
 Aus der kursorischen Betrachtung einiger Kommentare ergibt sich, das Automatisierung hier keinesfalls nur, oder überwiegend als Bedrohung betrachtet wird, sondern durchaus als "Bullshit"-befreiende Technologien.
+Der Fokus auf technologischen Wandel unterstützt auch eine pragmatische Interpretation der Kritik:
+Gemessen an den Möglichkeiten neuer Technologien erscheint *mehr* Arbeit als unsinnig, weil ersetzbar.
+
+```{r, fig.cap="Vergleich der Unigrams in Prozenten der drei größten Threads", fig.width=9, fig.height=9, warning=FALSE}
+td_coms %>% 
+  group_by(submission_title) %>% 
+  filter(n() > 1900) %>% 
+  count(submission_title, word) %>% 
+  mutate(proportion = n / sum(n)) %>% 
+  select(-n) %>% 
+  spread(submission_title, proportion) %>% 
+  gather(submission_title, proportion, 2:6, -"Forget fears...") %>% 
+  ggplot(
+    mapping = aes(
+      x = proportion, 
+      y = `Forget fears...`, 
+      color = abs(`Forget fears...` - proportion)
+    )
+  ) +
+  geom_abline(color = "gray40", lty = 2) +
+  geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) +
+  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5) +
+  scale_x_log10(labels = percent_format()) +
+  scale_y_log10(labels = percent_format()) +
+  scale_color_gradient(limits = c(0, 0.001), low = "darkslategray4", high = "gray75") +
+  facet_wrap(~submission_title, ncol = 2) +
+  theme(legend.position = "none") +
+  labs(y = "Forget fears of automation ... (wired.com)", x = NULL)
+```
+
+Vergleicht man die fünf größsten Einreichungen, zeigt sich ein etwas nuancierteres Bild.
+Im Unterschied zum dominanten, größten Einreichung (auf der y-Achse, basierend auf dem Wired Artikel), stehen bei den Threads "Bullshit Jobs" und "On bullshit" Automatisierung und UBI weniger im Vordergrund.
+Bei beiden scheint es eher auf einer Mikroebene um organisationelle und inhaltliche Fragen *innerhalb* eines (Software-)Unternehmens zu gehen (siehe etwa die häufigere Verwendung von `administrative`, `code`, `ceo`, `company`).
 
 
 # Feelgood Management

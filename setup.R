@@ -6,6 +6,7 @@ library(tidyverse)
 library(dplyr)
 library(magrittr)
 library(tidytext)
+library(scales)
 
 # knitr setup ====
 knitr::opts_chunk$set(
