@@ -173,7 +173,7 @@ Nach der Entfernung von Stoppwörtern ("and", "it", etc.) wurden die verbleibend
 
 
 ```{r}
-td_coms <- r_coms %>% 
+r_coms_by_line <- r_coms %>% 
   tidyr::separate_rows(
     body,
     sep = "\n\n"
@@ -188,7 +188,8 @@ td_coms <- r_coms %>%
   ) %>% 
   group_by(id) %>% 
   mutate(line = 1:n()) %>% 
-  ungroup() %>% 
+  ungroup()
+td_coms <- r_coms_by_line %>% 
   unnest_tokens(output = word, input = body, format = "text") %>% 
   anti_join(stop_words) %>% 
   tidyr::separate_rows(  # separate out sepcial charcs
@@ -280,6 +281,77 @@ td_coms %>%
 Vergleicht man die fünf größsten Einreichungen, zeigt sich ein etwas nuancierteres Bild.
 Im Unterschied zum dominanten, größten Einreichung (auf der y-Achse, basierend auf dem Wired Artikel), stehen bei den Threads "Bullshit Jobs" und "On bullshit" Automatisierung und UBI weniger im Vordergrund.
 Bei beiden scheint es eher auf einer Mikroebene um organisationelle und inhaltliche Fragen *innerhalb* eines (Software-)Unternehmens zu gehen (siehe etwa die häufigere Verwendung von `administrative`, `code`, `ceo`, `company`).
+
+Die oben stehende Abbildung zeigt die Suchanfragen skaliert nach den höchsten aus einer Gruppe von anderen neuen und trendigen Berufen.
+Im Vergleich wird deutlich, dass es sich bei FGM um ein ausgesprochenes Nischenphänomen handelt.
+
+<!-- TODO -->
+Der Vergleich der ausgewählten Threads könnte mit Hilfe einer üblichen $tf-idf$ Transformation noch präziser untersucht werden.
+
+Um die oben stehenden Unigrams zu erweitern, bietet sich auch ein Blick auf ein Netzwerk von Bigrams an.
+
+```{r bigram-network, fig.cap="Common bigrams in the reddit comments"}
+coms_bigram_graph <- r_coms_by_line %>% 
+  unnest_tokens(bigram, body, token = "ngrams", n = 2) %>% 
+  # put each in a column, so we can get rid of stop words
+  separate(bigram, c("word1", "word2"), sep = " ") %>% 
+  filter(
+    !word1 %in% c(stop_words$word, "http", "www", "https"),
+    !word2 %in% c(stop_words$word, "http", "www", "https"),
+  ) %>%
+  # duplication from above
+  tidyr::separate_rows(  # separate out sepcial charcs
+    word1,
+    sep = "_"
+  ) %>% 
+  tidyr::separate_rows(  # separate out sepcial charcs
+    word2,
+    sep = "_"
+  ) %>% 
+  filter(
+    is.na(suppressWarnings(as.numeric(word1))),
+    str_length(word1) > 1,
+    is.na(suppressWarnings(as.numeric(word2))),
+    str_length(word2) > 1,
+  ) %>% 
+  mutate(
+    word1 = stringr::str_extract(word1, "[a-z']+"),
+    word2 = stringr::str_extract(word2, "[a-z']+")
+  ) %>%  
+  mutate(
+    word1 = textstem::lemmatize_strings(x = word1, dictionary = dict),
+    word2 = textstem::lemmatize_strings(x = word2, dictionary = dict),
+    submission_title = stringr::str_trunc(
+      string = submission_title,
+      width = 15,
+      side = "right",
+      ellipsis = "..."
+    )
+  ) %>% 
+  count(word1, word2, sort = TRUE) %>% 
+  filter(n > 20) %>% 
+  igraph::graph_from_data_frame()
+
+library(ggraph)
+set.seed(2018)
+ggraph(coms_bigram_graph, layout = "fr") +
+  geom_edge_link(
+    show.legend = FALSE
+  ) +
+  geom_node_text(mapping = aes(label = name), vjust = 1, hjust = 1) + 
+  theme_void()
+```
+
+Oben stehend sind häufig vorkommenden (> 20) Bigramme in den reddit Kommentaren in einem Netzwerk abgebildet.
+Stoppwörter und Lemmaisierung sind wie oben beschrieben vorgenommen.
+Wie sich zeigt, sind die meisten Bigramm-Paare unverbunden, d.h. sie tauchen nur zusammen häufig auf.
+Unter diesen Paaren sind übliche Komposita, wie etwa `social security`.
+Einzig um das Lemma `job` entspannt sich ein größerer, verbundener Graph, inklusive der Stichwörter `bullshit`.
+Der Graph deutet auch erneut auf die diskursive Verbindung der Bullshit Jobs zum UBI hin.
+
+Einige der üblichen Ansätze für Textanalyse erscheinen für den vorliegenden Korpus wenig geeignet.
+Eine Sentiment-Analyse, zumindest eine auf Unigrams basierende, ist für die vorliegenden Daten mit gängigen Lexika wenig aussagekräftig.
+Der spezifische Kontext (hier: bullshit jobs) von Wörtern kann mit diesen Methoden nicht abgebildet werden.
 
 
 # Feelgood Management
@@ -410,10 +482,6 @@ g <- ggplot(
 g
 ```
 
-Die oben stehende Abbildung zeigt die Suchanfragen skaliert nach den höchsten aus einer Gruppe von anderen neuen und trendigen Berufen.
-Im Vergleich wird deutlich, dass es sich bei FGM um ein ausgesprochenes Nischenphänomen handelt.
-
-
 ## Twitter Trends
 
 ```{r twitter_grab, eval=FALSE, include=FALSE}
@@ -441,6 +509,7 @@ tweets <- purrr::imap_dfr(
 )
 readr::write_rds(x = tweets, path = "tweets.rds")
 ```
+
 
 ```{r twitter_load}
 tweets <- readr::read_rds(path = "tweets.rds")
