@@ -349,7 +349,9 @@ Unter diesen Paaren sind übliche Komposita, wie etwa `social security`.
 Einzig um das Lemma `job` entspannt sich ein größerer, verbundener Graph, inklusive der Stichwörter `bullshit`.
 Der Graph deutet auch erneut auf die diskursive Verbindung der Bullshit Jobs zum UBI hin.
 
-Einige der üblichen Ansätze für Textanalyse erscheinen für den vorliegenden Korpus wenig geeignet.
+Schließlich ist es interessant zu 
+
+Einige der sonst üblichen Ansätze für Textanalyse erscheinen für den vorliegenden Korpus wenig geeignet.
 Eine Sentiment-Analyse, zumindest eine auf Unigrams basierende, ist für die vorliegenden Daten mit gängigen Lexika wenig aussagekräftig.
 Der spezifische Kontext (hier: bullshit jobs) von Wörtern kann mit diesen Methoden nicht abgebildet werden.
 
