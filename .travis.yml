@@ -10,6 +10,8 @@ cache:
 script:
   - Rscript -e "rmarkdown::render_site()"
 
+apt_packages: libudunits2-dev
+
 deploy:
   provider: pages
   skip_cleanup: true
