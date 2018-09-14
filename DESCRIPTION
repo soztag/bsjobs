@@ -17,3 +17,5 @@ Imports:
   purrr,
   tidytext,
   textstem
+Remotes:
+  tidyverse/purrr
