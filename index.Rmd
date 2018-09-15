@@ -353,6 +353,20 @@ Einige der üblichen Ansätze für Textanalyse erscheinen für den vorliegenden 
 Eine Sentiment-Analyse, zumindest eine auf Unigrams basierende, ist für die vorliegenden Daten mit gängigen Lexika wenig aussagekräftig.
 Der spezifische Kontext (hier: bullshit jobs) von Wörtern kann mit diesen Methoden nicht abgebildet werden.
 
+Schließlich extrahieren wir mittels Latent Dirichlet Allocation (LDA) Muster von ähnlichen Thmene zwischen den unterschiedlichen Kommentaren.
+Bei einer LDA werden die einzelnen Dokumente (hier: Kommentare) als Mischungen von Themen beschrieben und die einzelnen Themen wiederrum als (möglicherweise überlappende) Mischungen von Wörtern.
+Eine LDA daher zerlegt die Rohdaten in zwei Matrizen: Eine Matrix $Wörter x Themen$ mit den Gewichten der Wörter pro Thema, und eine $Dokumente x Themen$ Matrix mit den Gewichten der Themen pro Dokument.
+Somit handelt es sich bei der LDA um eine Dimensionsreduktion, also um einen Ansatz des *unsupervised learning*. 
+
+```{r}
+td_coms %>% 
+  tidy()
+```
+
+
+
+
+
 
 # Feelgood Management
 

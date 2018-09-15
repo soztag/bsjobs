@@ -16,6 +16,7 @@ Imports:
   tidyverse,
   purrr,
   tidytext,
+  topicmodels,
   textstem
 Remotes:
   tidyverse/purrr
