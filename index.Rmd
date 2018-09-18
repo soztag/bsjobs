@@ -36,6 +36,7 @@ editor_options:
   </sub></small></p>
 </div>
 
+
 ```{r, child="README.rmd"}
 ```
 
@@ -195,9 +196,10 @@ td_coms <- r_coms_by_line %>%
   tidyr::separate_rows(  # separate out sepcial charcs
     word,
     sep = "_"
-  ) %>% 
-  filter(
-    is.na(as.numeric(word)),
+  )
+td_coms <- td_coms %>% 
+  dplyr::filter(
+    is.na(suppressWarnings(as.numeric(word))),
     str_length(word) > 1
   ) %>% 
   mutate(
@@ -238,7 +240,7 @@ Es verbleiben über **`r nrow(td_coms)`** Beobachtungen von **`r length(unique(t
 
 ```{r, fig.cap="Unigram der über 300 Mal genannten Wörter"}
 count(x = td_coms, word, sort = TRUE) %>% 
-  filter(n > 300) %>% 
+  dplyr::filter(n > 300) %>% 
   mutate(word = reorder(word, n)) %>% 
   ggplot(aes(word, n)) +
   geom_col() +
@@ -254,7 +256,7 @@ Gemessen an den Möglichkeiten neuer Technologien erscheint *mehr* Arbeit als un
 ```{r, fig.cap="Vergleich der Unigrams in Prozenten der drei größten Threads", fig.width=9, fig.height=9, warning=FALSE}
 td_coms %>% 
   group_by(submission_title) %>% 
-  filter(n() > 1900) %>% 
+  dplyr::filter(n() > 1900) %>% 
   count(submission_title, word) %>% 
   mutate(proportion = n / sum(n)) %>% 
   select(-n) %>% 
@@ -295,7 +297,7 @@ coms_bigram_graph <- r_coms_by_line %>%
   unnest_tokens(bigram, body, token = "ngrams", n = 2) %>% 
   # put each in a column, so we can get rid of stop words
   separate(bigram, c("word1", "word2"), sep = " ") %>% 
-  filter(
+  dplyr::filter(
     !word1 %in% c(stop_words$word, "http", "www", "https"),
     !word2 %in% c(stop_words$word, "http", "www", "https"),
   ) %>%
@@ -308,7 +310,7 @@ coms_bigram_graph <- r_coms_by_line %>%
     word2,
     sep = "_"
   ) %>% 
-  filter(
+  dplyr::filter(
     is.na(suppressWarnings(as.numeric(word1))),
     str_length(word1) > 1,
     is.na(suppressWarnings(as.numeric(word2))),
@@ -329,7 +331,7 @@ coms_bigram_graph <- r_coms_by_line %>%
     )
   ) %>% 
   count(word1, word2, sort = TRUE) %>% 
-  filter(n > 20) %>% 
+  dplyr::filter(n > 20) %>% 
   igraph::graph_from_data_frame()
 
 library(ggraph)
@@ -359,13 +361,8 @@ Eine LDA daher zerlegt die Rohdaten in zwei Matrizen: Eine Matrix $Wörter x The
 Somit handelt es sich bei der LDA um eine Dimensionsreduktion, also um einen Ansatz des *unsupervised learning*. 
 
 ```{r}
-td_coms %>% 
-  tidy()
+
 ```
-
-
-
-
 
 
 # Feelgood Management

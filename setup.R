@@ -3,10 +3,10 @@ library(knitr)
 library(rmarkdown)
 library(printr)
 library(tidyverse)
-library(dplyr)
 library(magrittr)
 library(tidytext)
 library(scales)
+library(dplyr)
 
 # knitr setup ====
 knitr::opts_chunk$set(
