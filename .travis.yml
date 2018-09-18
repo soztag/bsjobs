@@ -14,7 +14,7 @@ addons:
   apt:
     packages:
       - libudunits2-dev
-      - gsl-bin
+      - libgsl0-dev
 
 deploy:
   provider: pages
