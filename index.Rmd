@@ -361,7 +361,36 @@ Eine LDA daher zerlegt die Rohdaten in zwei Matrizen: Eine Matrix $Wörter x The
 Somit handelt es sich bei der LDA um eine Dimensionsreduktion, also um einen Ansatz des *unsupervised learning*. 
 
 ```{r}
+coms_lda_td <- td_coms %>% 
+  count(submission_id, word) %>% 
+  cast_dtm(document = submission_id, term = word, value = n) %>% 
+  topicmodels::LDA(control = list(seed = 1234), k = 2) %>% 
+  tidy(matrix = "beta")
+```
 
+```{r top_ten, fig.cap="20 Most Probable Words for two Extracted Topics."}
+coms_lda_td %>% 
+  group_by(topic) %>% 
+  top_n(20, beta) %>% 
+  ungroup() %>% 
+  arrange(topic, -beta) %>% 
+  mutate(term = reorder(term, beta)) %>% 
+  ggplot(mapping = aes(term, beta, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") + 
+  coord_flip()
+```
+
+```{r greatest_diff, fig.cap="Highest 20 Log Ratio of Beta in two Extracted Topics"}
+coms_lda_td %>% 
+  mutate(topic = paste0("topic", topic)) %>% 
+  spread(topic, beta) %>% 
+  dplyr::filter(topic1 > .001 | topic2 > .001) %>% 
+  mutate(log_ratio = log2(topic2/topic1)) %>% 
+  arrange(desc(abs(log_ratio))) %>% 
+  top_n(20, abs(log_ratio)) %>% 
+  ggplot(mapping = aes(x = term, y = log_ratio)) +
+  geom_bar(stat = "identity") + coord_flip()
 ```
 
 

@@ -19,4 +19,5 @@ Imports:
   topicmodels,
   textstem
 Remotes:
-  tidyverse/purrr
+  tidyverse/purrr,
+  juliasilge/tidytext
