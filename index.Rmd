@@ -37,7 +37,7 @@ editor_options:
 </div>
 
 
-```{r, child="README.rmd"}
+```{r, child="README.md"}
 ```
 
 ---
