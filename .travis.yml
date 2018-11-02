@@ -15,7 +15,7 @@ before_deploy:
 - openssl aes-256-cbc -K $encrypted_25eefe9df2ee_key -iv $encrypted_25eefe9df2ee_iv -in karli_rsa.enc -out $HOME/.ssh/karli_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 $HOME/.ssh/karli_rsa
-- ssh add $HOME/.ssh/karli_rsa
+- ssh-add $HOME/.ssh/karli_rsa
 deploy:
   provider: script
   skip_cleanup: true
