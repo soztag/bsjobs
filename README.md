@@ -2,7 +2,10 @@
 title: About
 ---
 
-[![Build Status](https://travis-ci.com/soztag/bsjobs.svg?branch=master)](https://travis-ci.com/soztag/bsjobs)
+<!-- badges: start -->
+[![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/soztag/bsjobs)](https://github.com/soztag/bsjobs/actions)
+<!-- badges: end -->
+
 
 ## Abstract
 
