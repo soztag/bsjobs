@@ -3,7 +3,7 @@ title: About
 ---
 
 <!-- badges: start -->
-[![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/soztag/bsjobs)](https://github.com/soztag/bsjobs/actions)
+[![Actions Status](https://github.com/soztag/bsjobs/workflows/Render%20and%20Deploy%20RMarkdown%20Website/badge.svg)](https://github.com/soztag/bsjobs/actions)
 <!-- badges: end -->
 
 ## Abstract

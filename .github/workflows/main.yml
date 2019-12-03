@@ -1,0 +1,30 @@
+name: Render and Deploy RMarkdown Website
+'on': push
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Install System Dependencies
+        run: |-
+          apt-get update && apt-get install -y libgsl0-dev libudunits2-dev
+      - name: Install Package Dependencies
+        run: |-
+          Rscript -e "install.packages('remotes')"
+          Rscript -e "remotes::install_deps()"
+      - name: Render Site
+        run: |-
+          Rscript -e "rmarkdown::render_site(encoding = 'UTF-8')"
+          echo "::set-env name=DEPLOY_PATH::$(Rscript -e "cat(rmarkdown::site_config()[['output_dir']])")"
+      - if: github.ref == 'refs/heads/master'
+        uses: maxheld83/rsync@v0.1.1
+        with:
+          args: $GITHUB_WORKSPACE/$DEPLOY_PATH/ pfs400wm@karli.rrze.uni-erlangen.de:/proj/websource/docs/FAU/fakultaet/phil/www.datascience.phil.fau.de/websource/bsjobs
+        env:
+          HOST_NAME: karli.rrze.uni-erlangen.de
+          HOST_IP: 131.188.16.138
+          HOST_FINGERPRINT: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFHJVSekYKuF5pMKyHe1jS9mUkXMWoqNQe0TTs2sY1OQj379e6eqVSqGZe+9dKWzL5MRFpIiySRKgvxuHhaPQU4=
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+    container: rocker/verse:3.5.2
